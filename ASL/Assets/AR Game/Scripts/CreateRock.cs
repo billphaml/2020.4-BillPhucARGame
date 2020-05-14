@@ -6,6 +6,10 @@ public class CreateRock : MonoBehaviour
 {
     private static GameObject rock = null;
     
+    // Stack to store rock created
+    private static Stack<Object> rocks = new Stack<Object>();
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,14 +25,28 @@ public class CreateRock : MonoBehaviour
             
             ASL.ASLHelper.InstanitateASLObject("Obstacle_Rock_Variant", position, Quaternion.identity,GameObject.Find("Level(Clone)").GetComponent<ASL.ASLObject>().m_Id, string.Empty, OnRockCreated, ClaimRejected, MoveRockWithFloats);
             GameVariables.isAddObject=false;
-            
         }
+        
+        // Remove rock on click
+        if(GameVariables.isRemoveObject&&rocks.Count>0){
+            GameObject obj = (GameObject)rocks.Peek();
+            rocks.Pop();
+            obj.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+            {
+                obj.GetComponent<ASL.ASLObject>().DeleteObject();
+            });
+            GameVariables.isRemoveObject=false;
+
+        }
+
     }
     // Gets called after the player has spawned in, receieves a reference to the player
     public static void OnRockCreated(GameObject _myGameObject)
     {
         // Gets a reference to the player from the passed in object
         rock = _myGameObject;
+        rocks.Push(rock);
+        
     }
     // Gets called if a claim to the player is rejected
     public static void ClaimRejected(string _id, int _cancelledCallbacks)

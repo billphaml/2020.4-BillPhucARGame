@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RockObj : MonoBehaviour
 {
-    public float moveSpeed = 0.0001f;
+    public float moveSpeed = 0.0002f;
     private Vector3 oldLoc;
     private Vector3 newLoc;
     private float offsetX=0.0f;
@@ -85,8 +85,6 @@ public class RockObj : MonoBehaviour
                 isSelected = false;
 
             });
-
-
         }
     }
     

@@ -35,6 +35,10 @@ namespace SimpleDemos
         /// <summary>Text that displays scene information to the user</summary>
         public Text m_CoinsCollected;
         
+        /// <summary>debug text</summary>
+        public Text m_debug;
+
+        
         /// <summary>Text that displays scene information to the user</summary>
         /// public Text m_Timer;
         
@@ -56,12 +60,11 @@ namespace SimpleDemos
             m_CoinsCollected.text="Score : " + GameVariables.collectCoins;
             
             /// Add event listener
-            m_Toggle = GetComponent<Toggle>();
+            Toggle toggle = m_Toggle.GetComponent<Toggle>();
             //Add listener for when the state of the Toggle changes, to take action
-            m_Toggle.onValueChanged.AddListener(delegate {
-                ToggleValueChanged(m_Toggle);
+            toggle.onValueChanged.AddListener(delegate {
+                ToggleValueChanged(toggle);
             });
-            GameVariables.isRayCasting = m_Toggle.isOn;
 
 
         }
@@ -69,10 +72,11 @@ namespace SimpleDemos
         /// <summary> The logic of this example - listens for screen touches and spawns whichever object is currently active on the drop down menu</summary>
         void Update()
         {
-            //m_Timer.text=GameVariables.debugStr;
+
+            m_debug.text=GameVariables.debugStr;
 
             m_CoinsCollected.text="Score : " + GameVariables.collectCoins;
-            
+
             Pose? touchPose = GetTouch();
             if (touchPose == null) //If we didn't hit anything - return
             {
@@ -148,9 +152,10 @@ namespace SimpleDemos
         }
         
         //Output the new state of the Toggle into Text
-        void ToggleValueChanged(Toggle change)
+        void ToggleValueChanged(Toggle t)
         {
-            GameVariables.isRayCasting = m_Toggle.isOn;
+            GameVariables.isRayCasting = t.isOn;
+
         }
 
     }

@@ -1,0 +1,1 @@
+Prefabs spawned by ASL (i.e. using the ASL.ASLHelper.InstanitateASLObject method) need to be in the Assets/Resources/MyPrefabs folder or else they won't be found.

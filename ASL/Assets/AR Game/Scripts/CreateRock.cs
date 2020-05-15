@@ -5,6 +5,7 @@ using UnityEngine;
 public class CreateRock : MonoBehaviour
 {
     private static GameObject rock = null;
+    private bool preStatus = false;
     
     // Stack to store rock created
     private static Stack<Object> rocks = new Stack<Object>();
@@ -38,7 +39,20 @@ public class CreateRock : MonoBehaviour
             GameVariables.isRemoveObject=false;
 
         }
+        
+        // Game Stop
+        if(GameVariables.gameStarted==false&&preStatus==true){
+            while(rocks.Count>0){
+                GameObject obj = (GameObject)rocks.Peek();
+                rocks.Pop();
+                obj.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                {
+                    obj.GetComponent<ASL.ASLObject>().DeleteObject();
+                });
 
+            }
+        }
+        preStatus=GameVariables.gameStarted;
     }
     // Gets called after the player has spawned in, receieves a reference to the player
     public static void OnRockCreated(GameObject _myGameObject)

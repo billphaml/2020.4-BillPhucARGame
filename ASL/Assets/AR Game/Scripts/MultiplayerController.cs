@@ -75,6 +75,10 @@ public class MultiplayerController : MonoBehaviour
             //    0.0f,
             //    joystick.Vertical * moveSpeed + Input.GetAxis("Vertical") * moveSpeed);
             //player.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(incrementAmount);
+            if(GameVariables.gameStarted==false){
+                player.GetComponent<ASL.ASLObject>().SendAndSetLocalPosition(new Vector3(0, 1.0f, 0));
+
+            }
         });
     }
 

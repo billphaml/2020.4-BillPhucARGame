@@ -35,8 +35,8 @@ namespace SimpleDemos
         /// <summary>Text that displays scene information to the user</summary>
         public Text m_CoinsCollected;
         
-        /// <summary>debug text</summary>
-        public Text m_debug;
+//        /// <summary>debug text</summary>
+//        public Text m_debug;
 
         
         /// <summary>Text that displays scene information to the user</summary>
@@ -73,7 +73,7 @@ namespace SimpleDemos
         void Update()
         {
 
-            m_debug.text=GameVariables.debugStr;
+//            m_debug.text=GameVariables.debugStr;
 
             m_CoinsCollected.text="Score : " + GameVariables.collectCoins;
 

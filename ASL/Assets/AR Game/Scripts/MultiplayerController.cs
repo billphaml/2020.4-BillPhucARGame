@@ -4,7 +4,9 @@ using UnityEngine;
 public class MultiplayerController : MonoBehaviour
 {
     // Speed of all players
-    public float moveSpeed = 0.2f;
+    public float moveSpeed = 0.3f;
+
+    public float slowSpeed = 0.1f;
 
     // Reference to the joystick
     private Joystick joystick;
@@ -36,14 +38,28 @@ public class MultiplayerController : MonoBehaviour
             // only send when input is detected
             // Note 2: PC player speed is faster than android speed. This could be because PC is
             // receiving both joystick and input speeds which is unintentional, fix this later
-            float[] direction = new float[]
+            if (player.GetComponent<PlayerController>().isSlowed == true)
             {
+                float[] direction = new float[]
+                {
+                joystick.Horizontal * slowSpeed + Input.GetAxis("Horizontal") * slowSpeed, // X Dir
+                0.0f,                                                                      // Y Dir
+                joystick.Vertical * slowSpeed + Input.GetAxis("Vertical") * slowSpeed,     // Z Dir
+                0.0f    // Unused
+                };
+                player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);
+            }
+            else
+            {
+                float[] direction = new float[]
+{
                 joystick.Horizontal * moveSpeed + Input.GetAxis("Horizontal") * moveSpeed, // X Dir
                 0.0f,                                                                      // Y Dir
                 joystick.Vertical * moveSpeed + Input.GetAxis("Vertical") * moveSpeed,     // Z Dir
                 0.0f    // Unused
-            };
-            player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);
+};
+                player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);
+            }
 
             // Movement type 2 [DEPRECATED]
             // Moves the player using rigidbody physics, only affects local clients

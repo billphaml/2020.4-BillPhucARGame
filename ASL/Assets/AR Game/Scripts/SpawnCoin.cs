@@ -29,10 +29,10 @@ public class SpawnCoin : MonoBehaviour
             
             // Creates a coin at a random location with a normal rotation orientation
             // Attaches coin the the gameobject (level)
-            ASL.ASLHelper.InstanitateASLObject("Coin", position,Quaternion.identity, gameObject.GetComponent<ASL.ASLObject>().m_Id,string.Empty,OnCoinCreated);
+            ASL.ASLHelper.InstanitateASLObject("Coin", position, Quaternion.identity, gameObject.GetComponent<ASL.ASLObject>().m_Id,string.Empty,OnCoinCreated);
             
             // Despawning coins once total coins equal max number of coins allowed
-            if(coins.Count>=GameVariables.maxCoins){
+            if (coins.Count >= GameVariables.maxCoins) {
                 GameObject coin = (GameObject)coins.Peek();
                 coins.Dequeue();
                 coin.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
@@ -48,6 +48,4 @@ public class SpawnCoin : MonoBehaviour
     {
         coins.Enqueue(_myGameObject);
     }
-    
-    
 }

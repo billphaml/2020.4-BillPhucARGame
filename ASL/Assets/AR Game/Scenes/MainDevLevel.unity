@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addObjButton: {fileID: 260587700}
+  removeObjButton: {fileID: 0}
 --- !u!114 &260587700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +616,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &620501148
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,8 +837,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9, y: -0.5}
-  m_SizeDelta: {x: -28, y: -3}
+  m_AnchoredPosition: {x: -20, y: -0.5}
+  m_SizeDelta: {x: 30, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758814407
 MonoBehaviour:
@@ -871,7 +872,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Raycasting
+  m_Text: 'Reposition Toggle
 
 '
 --- !u!222 &758814408
@@ -965,6 +966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addObjButton: {fileID: 1048574724}
+  removeObjButton: {fileID: 0}
 --- !u!114 &1048574724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,6 +1058,7 @@ GameObject:
   - component: {fileID: 1076586953}
   - component: {fileID: 1076586954}
   - component: {fileID: 1076586952}
+  - component: {fileID: 1076586955}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -1075,7 +1078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349a1a3e4e556434f996a4128b47dfc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.2
+  moveSpeed: 0.3
 --- !u!4 &1076586953
 Transform:
   m_ObjectHideFlags: 0
@@ -1108,6 +1111,18 @@ MonoBehaviour:
   m_NormalCloudAnchorObject: {fileID: 3412927446359963194, guid: 1d9ed9ffc8731334dacd3f202c1079d5, type: 3}
   m_CoinsCollected: {fileID: 1370711420}
   m_Toggle: {fileID: 465289118}
+--- !u!114 &1076586955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076586951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660f2da247645274a82afdda5d5089cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1226573632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,7 +1637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: -60, y: -20}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1420849676

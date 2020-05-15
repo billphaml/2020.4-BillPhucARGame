@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     public int collectedCoins = 0;
 
+    public bool isSlowed = false;
+
     // Delete coins when colliding
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +21,19 @@ public class PlayerController : MonoBehaviour
                 collectedCoins += 1;
                 GameVariables.collectCoins=collectedCoins;
             });
+        }
+
+        if (other.gameObject.tag == "Slow")
+        {
+            isSlowed = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Slow")
+        {
+            isSlowed = false;
         }
     }
 }

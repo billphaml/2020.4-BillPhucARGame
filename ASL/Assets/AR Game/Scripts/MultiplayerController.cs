@@ -28,7 +28,7 @@ public class MultiplayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         player.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
         {

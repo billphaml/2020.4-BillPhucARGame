@@ -38,12 +38,12 @@ namespace SimpleDemos
 //        /// <summary>debug text</summary>
 //        public Text m_debug;
 
-
         /// <summary>Text that displays scene information to the user</summary>
         /// public Text m_Timer;
         
         /// toggle for enable/disable raycasting
         public Toggle m_Toggle;
+
         /// <summary>Called before start - sets up the singleton object for this class</summary>
         private void Awake()
         {

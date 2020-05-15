@@ -62,12 +62,13 @@ public class MultiplayerController : MonoBehaviour
                 };
                 player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);
             }
-            if(GameVariables.gameStarted==false&&preStatus==true){
+
+            if (GameVariables.gameStarted == false && preStatus == true){
                 player.GetComponent<ASL.ASLObject>().SendAndSetLocalPosition(new Vector3(0, 1.0f, 0));
             }
         });
-        preStatus=GameVariables.gameStarted;
 
+        preStatus = GameVariables.gameStarted;
     }
 
     // Gets called after the player has spawned in, receieves a reference to the player

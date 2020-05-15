@@ -7,6 +7,7 @@ public class HandleClick : MonoBehaviour
 {
     public Button addObjButton;
     public Button removeObjButton;
+    public Button startButton;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,9 @@ public class HandleClick : MonoBehaviour
         
         Button btnRemove = removeObjButton.GetComponent<Button>();
         btnRemove.onClick.AddListener(clickRemove);
+        
+        Button btnStart = startButton.GetComponent<Button>();
+        btnStart.onClick.AddListener(clickStart);
     }
     
     void clickAdd(){
@@ -27,9 +31,20 @@ public class HandleClick : MonoBehaviour
         GameVariables.isRemoveObject = true;
     }
     
+    void clickStart(){
+        GameVariables.gameStarted = !GameVariables.gameStarted;
+    }
+
+    
     // Update is called once per frame
     void Update()
     {
-        
+        if(GameVariables.gameStarted)
+        startButton.GetComponentInChildren<Text>().text = "Reset";
+        else
+        {
+        startButton.GetComponentInChildren<Text>().text = "Start";
+        GameVariables.collectCoins = 0;
+        }
     }
 }

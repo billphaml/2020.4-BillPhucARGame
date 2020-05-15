@@ -18,7 +18,7 @@ public class SpawnCoin : MonoBehaviour
     void Update()
     {
         // Amount of time pasted is greater than delay
-        if (Time.time > nextSpawnTime)
+        if (Time.time > nextSpawnTime&&GameVariables.gameStarted==true)
         {
             // Reset delay
             nextSpawnTime = Time.time + timeBetweenSpawn;
@@ -41,6 +41,20 @@ public class SpawnCoin : MonoBehaviour
                 });
             }
         }
+        
+        // Game Stop
+        if(GameVariables.gameStarted==false){
+            while(coins.Count>0){
+                GameObject coin = (GameObject)coins.Peek();
+                coins.Dequeue();
+                coin.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                {
+                    coin.GetComponent<ASL.ASLObject>().DeleteObject();
+                });
+                
+            }
+        }
+        
     }
     
     // Gets called after the coin has spawned in,

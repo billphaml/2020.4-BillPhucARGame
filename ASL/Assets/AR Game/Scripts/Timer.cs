@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour
         if(!GameVariables.gameStarted)
         {
             seconds=0;
+            lbl.text="Time: "+seconds/60+"s";
             return;
         }
         seconds++;

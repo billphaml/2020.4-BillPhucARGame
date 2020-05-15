@@ -38,7 +38,7 @@ namespace SimpleDemos
 //        /// <summary>debug text</summary>
 //        public Text m_debug;
 
-        
+
         /// <summary>Text that displays scene information to the user</summary>
         /// public Text m_Timer;
         
@@ -147,8 +147,6 @@ namespace SimpleDemos
                 + " with a local position of: " + _worldOriginVisualizationObject.transform.localPosition;
                 m_Controller.m_DisplayInformation.gameObject.SetActive(false);
                 
-                /// Start time counter 
-                GameVariables.gameStarted = true;
         }
         
         //Output the new state of the Toggle into Text

@@ -14,6 +14,8 @@ public class MultiplayerController : MonoBehaviour
     // Reference to the player
     private static GameObject player = null;
 
+    private bool preStatus = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,34 +54,20 @@ public class MultiplayerController : MonoBehaviour
             else
             {
                 float[] direction = new float[]
-{
+                {
                 joystick.Horizontal * moveSpeed + Input.GetAxis("Horizontal") * moveSpeed, // X Dir
                 0.0f,                                                                      // Y Dir
                 joystick.Vertical * moveSpeed + Input.GetAxis("Vertical") * moveSpeed,     // Z Dir
                 0.0f    // Unused
-};
+                };
                 player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);
             }
-
-            // Movement type 2 [DEPRECATED]
-            // Moves the player using rigidbody physics, only affects local clients
-            //player.GetComponent<Rigidbody>().AddForce(new Vector3(
-            //    joystick.Horizontal * moveSpeed + Input.GetAxis("Horizontal") * moveSpeed,
-            //    0.0f,
-            //    joystick.Vertical * moveSpeed + Input.GetAxis("Vertical") * moveSpeed));
-
-            // Movement type 1 [DEPRECATED]
-            // Moves the player using ASL transform, affects all clients
-            //Vector3 incrementAmount = new Vector3(
-            //    joystick.Horizontal * moveSpeed + Input.GetAxis("Horizontal") * moveSpeed,
-            //    0.0f,
-            //    joystick.Vertical * moveSpeed + Input.GetAxis("Vertical") * moveSpeed);
-            //player.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(incrementAmount);
-            if(GameVariables.gameStarted==false){
+            if(GameVariables.gameStarted==false&&preStatus==true){
                 player.GetComponent<ASL.ASLObject>().SendAndSetLocalPosition(new Vector3(0, 1.0f, 0));
-
             }
         });
+        preStatus=GameVariables.gameStarted;
+
     }
 
     // Gets called after the player has spawned in, receieves a reference to the player

@@ -8,6 +8,16 @@ public class HandleClick : MonoBehaviour
     public Button addObjButton;
     public Button removeObjButton;
     public Button startButton;
+    public Button popoutButton;
+    public Button rockButton;
+    public Button spell1Button;
+
+    public delegate void OnButtonClickDelegate ();
+    public static OnButtonClickDelegate popClickDelegate;
+    public static OnButtonClickDelegate rockClickDelegate;
+    public static OnButtonClickDelegate removeClickDelegate;
+    public static OnButtonClickDelegate resetClickDelegate;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,18 +31,44 @@ public class HandleClick : MonoBehaviour
         
         Button btnStart = startButton.GetComponent<Button>();
         btnStart.onClick.AddListener(clickStart);
+        
+        Button btnRock = rockButton.GetComponent<Button>();
+        btnRock.onClick.AddListener(clickRock);
+        
+        Button btnSpell1 = spell1Button.GetComponent<Button>();
+        btnSpell1.onClick.AddListener(clickSpell1);
+
+        Button btnPop = popoutButton.GetComponent<Button>();
+        btnPop.onClick.AddListener(clickPopout);
+
+
     }
     
     void clickAdd(){
-        GameVariables.isAddObject = true;
+        popClickDelegate();
     }
     
     void clickRemove(){
-        GameVariables.isRemoveObject = true;
+//        GameVariables.isRemoveObject = true;
+        removeClickDelegate();
     }
     
     void clickStart(){
         GameVariables.gameStarted = !GameVariables.gameStarted;
+        if(!GameVariables.gameStarted)
+        resetClickDelegate();
+    }
+
+    void clickRock(){
+        GameVariables.spellSelected = 0;
+    }
+    
+    void clickPopout(){
+        popClickDelegate();
+    }
+    
+    void clickSpell1(){
+        GameVariables.spellSelected = 1;
     }
 
     

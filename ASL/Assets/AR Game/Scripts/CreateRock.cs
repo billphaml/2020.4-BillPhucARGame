@@ -5,55 +5,60 @@ using UnityEngine;
 public class CreateRock : MonoBehaviour
 {
     private static GameObject rock = null;
-    private bool preStatus = false;
     
     // Stack to store rock created
     private static Stack<Object> rocks = new Stack<Object>();
 
-    
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Delegate for handling click button
+        HandleClick.popClickDelegate += AddRock;
+        HandleClick.rockClickDelegate += AddRock;
+        HandleClick.removeClickDelegate += RemoveRock;
+        HandleClick.resetClickDelegate += RemoveAllRock;
+
+
     }
     
-    // Update is called once per frame
-    void Update()
+    // OnClick AddRock
+    void AddRock()
     {
-        if(GameVariables.isAddObject){
-            Vector3 position = gameObject.transform.position;
-            position += new Vector3(Random.Range(-10f, 10f), 0.5f, Random.Range(-10f, 10f));
+        Vector3 position = gameObject.transform.position;
+        position += new Vector3(Random.Range(-10f, 10f), 0.5f, Random.Range(-10f, 10f));
             
-            ASL.ASLHelper.InstanitateASLObject("Obstacle_Rock_Variant", position, Quaternion.identity,GameObject.Find("Level(Clone)").GetComponent<ASL.ASLObject>().m_Id, string.Empty, OnRockCreated, ClaimRejected, MoveRockWithFloats);
-            GameVariables.isAddObject=false;
-        }
-        
-        // Remove rock on click
-        if(GameVariables.isRemoveObject&&rocks.Count>0){
+        ASL.ASLHelper.InstanitateASLObject("Obstacle_Rock_Variant", position, Quaternion.identity,GameObject.Find("Level(Clone)").GetComponent<ASL.ASLObject>().m_Id, string.Empty, OnRockCreated, ClaimRejected, MoveRockWithFloats);
+    }
+    // Onclick Remove
+    void RemoveRock(){
+        if(rocks.Count>0){
             GameObject obj = (GameObject)rocks.Peek();
             rocks.Pop();
             obj.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
             {
                 obj.GetComponent<ASL.ASLObject>().DeleteObject();
             });
-            GameVariables.isRemoveObject=false;
-
         }
-        
-        // Game Stop
-        if(GameVariables.gameStarted==false&&preStatus==true){
-            while(rocks.Count>0){
-                GameObject obj = (GameObject)rocks.Peek();
-                rocks.Pop();
-                obj.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
-                {
-                    obj.GetComponent<ASL.ASLObject>().DeleteObject();
-                });
-
-            }
-        }
-        preStatus=GameVariables.gameStarted;
     }
+    
+    // OnClick Reset
+    void RemoveAllRock(){
+        while(rocks.Count>0){
+            GameObject obj = (GameObject)rocks.Peek();
+            rocks.Pop();
+            obj.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+            {
+                obj.GetComponent<ASL.ASLObject>().DeleteObject();
+            });
+        }
+            }
+
+    
+    // Update is called once per frame
+    void Update()
+    {
+    }
+    
     // Gets called after the player has spawned in, receieves a reference to the player
     public static void OnRockCreated(GameObject _myGameObject)
     {

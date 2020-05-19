@@ -125,8 +125,8 @@ Rigidbody:
   m_GameObject: {fileID: 2816860296409747250}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 0.1
+  m_Drag: 2
+  m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -171,3 +171,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectedCoins: 0
+  isSlowed: 0

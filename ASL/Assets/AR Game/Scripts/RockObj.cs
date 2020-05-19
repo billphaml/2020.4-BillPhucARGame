@@ -12,14 +12,17 @@ public class RockObj : MonoBehaviour
     private bool isDragging = false;
     private bool isSelected = false;
 
-    
+    void Start(){
+        HandleClick.removeClickDelegate += RemoveRock;
+
+    }
     // On touch
     void OnMouseDown()
     {
         newLoc=oldLoc=Input.mousePosition;
         GameVariables.debugStr="OnMouseDown";
         isDragging = true;
-        isSelected = true;
+        GameVariables.selectRock = isSelected = true;
 
     }
     
@@ -70,19 +73,18 @@ public class RockObj : MonoBehaviour
         offsetX=0.0f;
         offsetY=0.0f;
         
-        /// Check if the rock is selected to be removed
-        toRemove();
     }
     
     /// Remove rock
-    void toRemove(){
-        if(isSelected &&  GameVariables.isRemoveObject)
+    void RemoveRock(){
+        if(!GameVariables.selectRock)
+        return;
+        if(isSelected)
         {
             gameObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
             {
                 gameObject.GetComponent<ASL.ASLObject>().DeleteObject();
-                GameVariables.isRemoveObject=false;
-                isSelected = false;
+                GameVariables.selectRock = isSelected = false;
 
             });
         }

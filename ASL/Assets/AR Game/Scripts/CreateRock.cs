@@ -13,11 +13,10 @@ public class CreateRock : MonoBehaviour
     void Start()
     {
         // Delegate for handling click button
-        HandleClick.popClickDelegate += AddRock;
+        HandleClick.popClickDelegate += PopPout;
         HandleClick.rockClickDelegate += AddRock;
-        HandleClick.removeClickDelegate += RemoveRock;
         HandleClick.resetClickDelegate += RemoveAllRock;
-
+        HandleClick.removeClickDelegate += RemoveRock;
 
     }
     
@@ -31,6 +30,8 @@ public class CreateRock : MonoBehaviour
     }
     // Onclick Remove
     void RemoveRock(){
+        if(GameVariables.selectRock)
+        return;
         if(rocks.Count>0){
             GameObject obj = (GameObject)rocks.Peek();
             rocks.Pop();
@@ -51,12 +52,20 @@ public class CreateRock : MonoBehaviour
                 obj.GetComponent<ASL.ASLObject>().DeleteObject();
             });
         }
-            }
+    }
+
+    //  OnClick Popout
+    void PopPout(){
+        if(GameVariables.spellSelected==0){
+            AddRock();
+        }
+    }
 
     
     // Update is called once per frame
     void Update()
     {
+
     }
     
     // Gets called after the player has spawned in, receieves a reference to the player

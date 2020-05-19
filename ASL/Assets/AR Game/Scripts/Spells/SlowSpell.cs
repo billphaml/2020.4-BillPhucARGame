@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +9,9 @@ public class SlowSpell : MonoBehaviour
 
     private bool fireSpell = true;
 
+    void Start(){
+        HandleClick.popClickDelegate += Popout;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -47,5 +50,16 @@ public class SlowSpell : MonoBehaviour
         }
 
         return ASL.ARWorldOriginHelper.GetInstance().Raycast(Input.GetTouch(0).position);
+    }
+    
+    /// Popout
+    void Popout(){
+        if (GameVariables.spellSelected!=1)
+        return;
+        Vector3 position = gameObject.transform.position;
+        position += new Vector3(Random.Range(-10f, 10f), 0.5f, Random.Range(-10f, 10f));
+        
+        ASL.ASLHelper.InstanitateASLObject("Slow Spell", position, Quaternion.identity,GameObject.Find("Level(Clone)").GetComponent<ASL.ASLObject>().m_Id);
+
     }
 }

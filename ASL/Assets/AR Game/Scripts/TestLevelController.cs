@@ -53,9 +53,10 @@ namespace SimpleDemos
         /// <summary>Called on start up - sets the initial text for the user</summary>
         void Start()
         {
-            m_DisplayInformation.text = "The first location you touch will spawn the World Origin Cloud Anchor. " +
-                "Only 1 player can spawn this cloud anchor and it should always be the first cloud anchor created if you plan on utilizing cloud anchors.";
-                
+            m_DisplayInformation.text = "Touch to spawn level.";
+            //m_DisplayInformation.text = "The first location you touch will spawn the World Origin Cloud Anchor. " +
+            //    "Only 1 player can spawn this cloud anchor and it should always be the first cloud anchor created if you plan on utilizing cloud anchors.";
+
             /// Set score text
             m_CoinsCollected.text="Score : " + GameVariables.collectCoins;
             
@@ -88,7 +89,8 @@ namespace SimpleDemos
             if (!m_WorldOriginInitilized && ASL.GameLiftManager.GetInstance().AmLowestPeer())
             {
                 m_WorldOriginInitilized = true;
-                m_DisplayInformation.text = "Creating World Origin Visualization object now.";
+                m_DisplayInformation.text = "Spawning in the level now.";
+                //m_DisplayInformation.text = "Creating World Origin Visualization object now.";
 
                 m_LastValidPose = touchPose;
                 //It doesn't matter what we set the position to be to when creating this object because it will be reset to zero before it gets parented to its cloud anchor. 
@@ -142,9 +144,10 @@ namespace SimpleDemos
         /// <param name="_spawnLocation">The pose of the world origin</param>
         public static void WorldOriginTextUpdate(GameObject _worldOriginVisualizationObject, Pose _spawnLocation)
         {
-            m_Controller.m_DisplayInformation.text = "Finished creating World Origin Cloud Anchor. You are now free to create more cloud anchors or objects. " +
-                "The position you touched on the screen was: " + _spawnLocation.position + " and the anchor's world position is: " + _worldOriginVisualizationObject.transform.position
-                + " with a local position of: " + _worldOriginVisualizationObject.transform.localPosition;
+            m_Controller.m_DisplayInformation.text = "Level has been spawned.";
+            //m_Controller.m_DisplayInformation.text = "Finished creating World Origin Cloud Anchor. You are now free to create more cloud anchors or objects. " +
+            //    "The position you touched on the screen was: " + _spawnLocation.position + " and the anchor's world position is: " + _worldOriginVisualizationObject.transform.position
+            //    + " with a local position of: " + _worldOriginVisualizationObject.transform.localPosition;
                 m_Controller.m_DisplayInformation.gameObject.SetActive(false);
                 
         }

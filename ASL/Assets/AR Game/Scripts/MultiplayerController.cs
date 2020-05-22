@@ -44,9 +44,9 @@ public class MultiplayerController : MonoBehaviour
             {
                 float[] direction = new float[]
                 {
-                joystick.Horizontal * slowSpeed + Input.GetAxis("Horizontal") * slowSpeed, // X Dir
+                (joystick.Horizontal * slowSpeed + Input.GetAxis("Horizontal") * slowSpeed) * Time.deltaTime, // X Dir
                 0.0f,                                                                      // Y Dir
-                joystick.Vertical * slowSpeed + Input.GetAxis("Vertical") * slowSpeed,     // Z Dir
+                (joystick.Vertical * slowSpeed + Input.GetAxis("Vertical") * slowSpeed) * Time.deltaTime,     // Z Dir
                 0.0f    // Unused
                 };
                 player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);
@@ -55,9 +55,9 @@ public class MultiplayerController : MonoBehaviour
             {
                 float[] direction = new float[]
                 {
-                joystick.Horizontal * moveSpeed + Input.GetAxis("Horizontal") * moveSpeed, // X Dir
+                (joystick.Horizontal * moveSpeed + Input.GetAxis("Horizontal") * moveSpeed) * Time.deltaTime, // X Dir
                 0.0f,                                                                      // Y Dir
-                joystick.Vertical * moveSpeed + Input.GetAxis("Vertical") * moveSpeed,     // Z Dir
+                (joystick.Vertical * moveSpeed + Input.GetAxis("Vertical") * moveSpeed) * Time.deltaTime,     // Z Dir
                 0.0f    // Unused
                 };
                 player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);

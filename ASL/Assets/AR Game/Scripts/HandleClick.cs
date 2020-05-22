@@ -35,8 +35,8 @@ public class HandleClick : MonoBehaviour
         Button btnRock = rockButton.GetComponent<Button>();
         btnRock.onClick.AddListener(clickRock);
         
-        Button btnSpell1 = spell1Button.GetComponent<Button>();
-        btnSpell1.onClick.AddListener(clickSpell1);
+//        Button btnSpell1 = spell1Button.GetComponent<Button>();
+//        btnSpell1.onClick.AddListener(clickSpell1);
 
         Button btnPop = popoutButton.GetComponent<Button>();
         btnPop.onClick.AddListener(clickPopout);

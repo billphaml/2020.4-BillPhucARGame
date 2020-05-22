@@ -8,6 +8,8 @@ public class SlowSpell : MonoBehaviour
 {
     public Button slowButton;
 
+    public Text cooldownDisplay;
+
     private Pose pose;
 
     private bool fireSpell = false;
@@ -36,6 +38,15 @@ public class SlowSpell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.time > currentCooldown)
+        {
+            cooldownDisplay.text = "";
+        }
+        else
+        {
+            cooldownDisplay.text = (Mathf.Round(Mathf.Abs(Time.time - currentCooldown))).ToString();
+        }
+
         Pose? touchPose = GetTouch();
 
         if (touchPose == null) //If we didn't hit anything - return

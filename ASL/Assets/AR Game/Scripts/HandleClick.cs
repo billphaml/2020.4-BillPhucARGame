@@ -44,7 +44,7 @@ public class HandleClick : MonoBehaviour
 
     }
     
-    void clickAdd(){
+    void clickAdd() {
         popClickDelegate();
     }
     

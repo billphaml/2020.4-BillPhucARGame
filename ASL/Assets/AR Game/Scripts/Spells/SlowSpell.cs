@@ -2,16 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SlowSpell : MonoBehaviour
 {
+    public Button slowButton;
+
     private Pose pose;
 
-    private bool fireSpell = true;
+    private bool fireSpell = false;
 
-    void Start(){
-        HandleClick.popClickDelegate += Popout;
+    private float currentCooldown;
+
+    public float cooldownTime = 10.0f;
+
+    private void Start()
+    {
+        // Adds a listener to call ChargeOnClick when button is pressed
+        slowButton.onClick.AddListener(ChargeOnClick);
     }
+
+    // Allows the next click to fire the spell
+    void ChargeOnClick()
+    {
+        if (Time.time > currentCooldown && GameVariables.gameStarted == true)
+        {
+            currentCooldown = Time.time + cooldownTime;
+
+            fireSpell = true;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -27,6 +48,7 @@ public class SlowSpell : MonoBehaviour
         if (fireSpell == true)
         {
             ASL.ASLHelper.InstanitateASLObject("Slow Spell", pose.position, Quaternion.identity);
+            fireSpell = false;
         }
     }
 
@@ -50,16 +72,5 @@ public class SlowSpell : MonoBehaviour
         }
 
         return ASL.ARWorldOriginHelper.GetInstance().Raycast(Input.GetTouch(0).position);
-    }
-    
-    /// Popout
-    void Popout(){
-        if (GameVariables.spellSelected!=1)
-        return;
-        Vector3 position = gameObject.transform.position;
-        position += new Vector3(Random.Range(-10f, 10f), 0.5f, Random.Range(-10f, 10f));
-        
-        ASL.ASLHelper.InstanitateASLObject("Slow Spell", position, Quaternion.identity,GameObject.Find("Level(Clone)").GetComponent<ASL.ASLObject>().m_Id);
-
     }
 }

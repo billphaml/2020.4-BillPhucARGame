@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4292585143431684907}
   - component: {fileID: 4018804579505169922}
-  - component: {fileID: 1751822712646002182}
+  - component: {fileID: 8154901979855278932}
   m_Layer: 0
   m_Name: Slow Spell
   m_TagString: Slow
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd7436c6ddd3d84db0754415ceaa396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &1751822712646002182
-SphereCollider:
+--- !u!136 &8154901979855278932
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -55,8 +55,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 1.5
+  m_Height: 5
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8820520970942385944
 GameObject:

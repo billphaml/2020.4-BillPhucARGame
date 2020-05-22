@@ -18,7 +18,7 @@ public class SpawnCoin : MonoBehaviour
     void Update()
     {
         // Amount of time pasted is greater than delay
-        if (Time.time > nextSpawnTime&&GameVariables.gameStarted==true)
+        if (Time.time > nextSpawnTime && GameVariables.gameStarted == true)
         {
             // Reset delay
             nextSpawnTime = Time.time + timeBetweenSpawn;

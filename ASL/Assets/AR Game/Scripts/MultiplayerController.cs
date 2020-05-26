@@ -69,8 +69,16 @@ public class MultiplayerController : MonoBehaviour
         // Sets the internal reference to the player
         player = _myGameObject;
 
-        // Sets the player model to a random color
-        player.transform.GetChild(0).GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        player.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+        {
+            float[] myValue = new float[4];
+            myValue[0] = Random.Range(0.0f, 1.0f);
+            myValue[1] = Random.Range(0.0f, 1.0f);;
+            myValue[2] = Random.Range(0.0f, 1.0f);
+            myValue[3] = 1f;
+            player.GetComponent<ASL.ASLObject>().SendFloatArray(myValue);
+        });
+
     }
 
     // Gets called if a claim to the player is rejected
@@ -88,7 +96,9 @@ public class MultiplayerController : MonoBehaviour
 
         // Gets the player matching the id of the player that called the send floats function
         ASL.ASLHelper.m_ASLObjects.TryGetValue(_id, out temp);
-
+        if(_floats[3]==1f){
+            temp.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(_floats[0], _floats[1], _floats[2], 1.0f);
+        } else    {
         Vector3 dir = new Vector3(_floats[0], _floats[1], _floats[2]);
 
         // If there is input else stop the player
@@ -101,5 +111,7 @@ public class MultiplayerController : MonoBehaviour
         {
             temp.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
+        }
+
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - AvailableMatches
   - Coin
   - Slow
+  - Map
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - PostProcessing
   - 
-  - 
+  - Map
   - 
   - 
   - 

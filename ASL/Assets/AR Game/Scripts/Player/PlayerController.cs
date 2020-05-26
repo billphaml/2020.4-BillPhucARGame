@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
             {
                 other.GetComponent<ASL.ASLObject>().DeleteObject();
                 collectedCoins += 1;
-                GameVariables.collectCoins=collectedCoins;
+                GameVariables.collectCoins = collectedCoins;
             });
         }
 

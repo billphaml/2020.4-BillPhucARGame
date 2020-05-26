@@ -9,7 +9,7 @@ public class Despawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeSinceSpawn > 60)
+        if (timeSinceSpawn > 30)
         {
             Destroy(gameObject);
         }

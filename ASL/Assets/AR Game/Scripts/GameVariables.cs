@@ -12,9 +12,4 @@ public static class GameVariables
     public static int maxCoins = 20;
     public static int spellSelected = 0;
     public static bool selectRock = false;
-
-
-    
-
-
 }

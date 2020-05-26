@@ -25,8 +25,10 @@ public class CreateRock : MonoBehaviour
     {
         Vector3 position = gameObject.transform.position;
         position += new Vector3(Random.Range(-10f, 10f), 0.5f, Random.Range(-10f, 10f));
-            
-        ASL.ASLHelper.InstanitateASLObject("Obstacle_Rock_Variant", position, Quaternion.identity,GameObject.Find("Level(Clone)").GetComponent<ASL.ASLObject>().m_Id, string.Empty, OnRockCreated, ClaimRejected, MoveRockWithFloats);
+
+        ASL.ASLHelper.InstanitateASLObject("Obstacle_Rock_Variant", position, Quaternion.identity, 
+            GameObject.Find("Level(Clone)").GetComponent<ASL.ASLObject>().m_Id, string.Empty, OnRockCreated, ClaimRejected, MoveRockWithFloats);
+
     }
     // Onclick Remove
     void RemoveRock(){

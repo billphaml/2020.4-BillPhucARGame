@@ -20,8 +20,10 @@ public class AssignPlayerToLevel : MonoBehaviour
         // Sets the parent for the player
         if (transform.parent == null)
         {
-            if(parent!=null)
-            gameObject.transform.SetParent(parent.transform, false);
+            if (parent != null)
+            {
+                gameObject.transform.SetParent(parent.transform, false);
+            }
         }
     }
 }

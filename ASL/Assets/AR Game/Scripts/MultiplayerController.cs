@@ -4,9 +4,9 @@ using UnityEngine;
 public class MultiplayerController : MonoBehaviour
 {
     // Speed of all players
-    public float moveSpeed = 0.3f;
+    public float moveSpeed = 10f;
 
-    public float slowSpeed = 0.1f;
+    public float slowSpeed = 3f;
 
     // Reference to the joystick
     private Joystick joystick;
@@ -14,21 +14,19 @@ public class MultiplayerController : MonoBehaviour
     // Reference to the player
     private static GameObject player = null;
 
-    private bool preStatus = false;
-
     // Start is called before the first frame update
     void Start()
     {
         // Spawns in the player and calls the function OnPlayerCreated()
         ASL.ASLHelper.InstanitateASLObject("Player", new Vector3(0, 1.0f, 0), Quaternion.identity,
             string.Empty, string.Empty, OnPlayerCreated, ClaimRejected, MovePlayerWithFloats);
-//
+
         // Gets a reference to the joystick from the hierarchy
         joystick = FindObjectOfType<Joystick>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         player.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
         {
@@ -44,10 +42,10 @@ public class MultiplayerController : MonoBehaviour
             {
                 float[] direction = new float[]
                 {
-                (joystick.Horizontal * slowSpeed + Input.GetAxis("Horizontal") * slowSpeed) * Time.deltaTime, // X Dir
-                0.0f,                                                                      // Y Dir
-                (joystick.Vertical * slowSpeed + Input.GetAxis("Vertical") * slowSpeed) * Time.deltaTime,     // Z Dir
-                0.0f    // Unused
+                    joystick.Horizontal * slowSpeed * Time.deltaTime + Input.GetAxis("Horizontal") * slowSpeed * Time.deltaTime, // X Dir
+                    0.0f,                                                                      // Y Dir
+                    joystick.Vertical * slowSpeed * Time.deltaTime + Input.GetAxis("Vertical") * slowSpeed * Time.deltaTime,     // Z Dir
+                    0.0f    // Unused
                 };
                 player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);
             }
@@ -55,33 +53,24 @@ public class MultiplayerController : MonoBehaviour
             {
                 float[] direction = new float[]
                 {
-                (joystick.Horizontal * moveSpeed + Input.GetAxis("Horizontal") * moveSpeed) * Time.deltaTime, // X Dir
-                0.0f,                                                                      // Y Dir
-                (joystick.Vertical * moveSpeed + Input.GetAxis("Vertical") * moveSpeed) * Time.deltaTime,     // Z Dir
-                0.0f    // Unused
+                    joystick.Horizontal * moveSpeed * Time.deltaTime + Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, // X Dir
+                    0.0f,                                                                      // Y Dir
+                    joystick.Vertical * moveSpeed * Time.deltaTime + Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime,     // Z Dir
+                    0.0f    // Unused
                 };
                 player.GetComponent<ASL.ASLObject>().SendFloatArray(direction);
             }
-
-            if (GameVariables.gameStarted == false && preStatus == true){
-                player.GetComponent<ASL.ASLObject>().SendAndSetLocalPosition(new Vector3(0, 1.0f, 0));
-            }
         });
-
-        preStatus = GameVariables.gameStarted;
     }
 
     // Gets called after the player has spawned in, receieves a reference to the player
     public static void OnPlayerCreated(GameObject _myGameObject)
     {
+        // Sets the internal reference to the player
         player = _myGameObject;
-        // Gets a reference to the player from the passed in object
-        var gametransform = _myGameObject.transform;
-        var playercmp = gametransform.GetChild(0);
-        
-        // Assigns the player object a random color
-        playercmp.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
+        // Sets the player model to a random color
+        player.transform.GetChild(0).GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
 
     // Gets called if a claim to the player is rejected
@@ -100,8 +89,17 @@ public class MultiplayerController : MonoBehaviour
         // Gets the player matching the id of the player that called the send floats function
         ASL.ASLHelper.m_ASLObjects.TryGetValue(_id, out temp);
 
-        // Applies rigidbody physics to the player using floats containing direction
-        temp.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(
-            _floats[0], _floats[1], _floats[2]));
+        Vector3 dir = new Vector3(_floats[0], _floats[1], _floats[2]);
+
+        // If there is input else stop the player
+        if (dir != Vector3.zero)
+        {
+            // Applies rigidbody physics to the player using floats containing direction
+            temp.gameObject.GetComponent<Rigidbody>().AddForce(dir);
+        }
+        else
+        {
+            temp.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
     }
 }

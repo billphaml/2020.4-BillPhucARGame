@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 // Deletes coin when collding with them
 // Move this function to the coin object later so player object doesn't need two colliders
 public class PlayerController : MonoBehaviour
 {
     public int collectedCoins = 0;
+    public TextMeshPro TmpPrefab;
 
     public bool isSlowed = false;
 
@@ -35,5 +37,10 @@ public class PlayerController : MonoBehaviour
         {
             isSlowed = false;
         }
+    }
+    
+    void Start(){
+        TmpPrefab.text = ASL.GameLiftManager.GetInstance().m_Username;
+
     }
 }

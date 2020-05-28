@@ -47,7 +47,7 @@ namespace ASL
         private static ARWorldOriginHelper m_Instance;
         private Material[] meshMats;
         private Material[] lineMats;
-
+        private Color particleColor = new Color(1f,1f,1f,0f);
         /// <summary>
         /// SIngleton for this class
         /// </summary>
@@ -86,12 +86,12 @@ namespace ASL
             m_ARPlaneManager = GameObject.Find("AR Session Origin").GetComponent<ARPlaneManager>();
             meshMats = m_ARPlaneManager.planePrefab.GetComponent<MeshRenderer> ().materials;
             lineMats = m_ARPlaneManager.planePrefab.GetComponent<LineRenderer> ().materials;
-
 #endif
         }
         
-        /// Change visibility of AR planes
+        /// Change visibility of AR planes and particles
         public void SetInvisible(bool value){
+            // Set render material color
             if(value){
                 m_ARPlaneManager.planePrefab.GetComponent<MeshRenderer> ().materials = meshMats;
                 m_ARPlaneManager.planePrefab.GetComponent<LineRenderer> ().materials = lineMats;
@@ -101,6 +101,7 @@ namespace ASL
                 m_ARPlaneManager.planePrefab.GetComponent<LineRenderer> ().materials = new Material[] { };
             }
 
+            // Update render materials for all Planes and Particles
             foreach ( GameObject ObjectFound in GameObject.FindGameObjectsWithTag("ARPlane"))
             {
                 if(!value){
@@ -112,6 +113,19 @@ namespace ASL
                 ObjectFound.GetComponent<LineRenderer>().materials = lineMats;
                 }
             }
+            
+            foreach ( GameObject ObjectFound in GameObject.FindGameObjectsWithTag("ARParticle"))
+            {
+                if(!value){
+                    particleColor = ObjectFound.GetComponent<ParticleSystem>().startColor;
+                    ObjectFound.GetComponent<ParticleSystem>().startColor =  new Color(1f,1f,1f,0f);
+                }
+                else{
+                    ObjectFound.GetComponent<ParticleSystem>().startColor = particleColor;
+
+                }
+            }
+
         }
 
         /// <summary>

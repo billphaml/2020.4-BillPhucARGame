@@ -10,6 +10,7 @@ TagManager:
   - Slow
   - Map
   - ARPlane
+  - ARParticle
   layers:
   - Default
   - TransparentFX

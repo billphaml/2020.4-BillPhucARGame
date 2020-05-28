@@ -67,14 +67,11 @@ namespace SimpleDemos
                 ToggleValueChanged(toggle);
             });
 
-
         }
 
         /// <summary> The logic of this example - listens for screen touches and spawns whichever object is currently active on the drop down menu</summary>
         void Update()
         {
-
-//            m_debug.text=GameVariables.debugStr;
 
             m_CoinsCollected.text="Score : " + GameVariables.collectCoins;
 
@@ -156,7 +153,7 @@ namespace SimpleDemos
         void ToggleValueChanged(Toggle t)
         {
             GameVariables.isRayCasting = t.isOn;
-
+            ASL.ARWorldOriginHelper.GetInstance().SetInvisible(t.isOn);
         }
 
     }

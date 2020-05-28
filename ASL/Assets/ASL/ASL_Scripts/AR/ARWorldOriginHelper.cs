@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ARCoreWorldOriginHelper.cs" company="Google">
 //
 // Copyright 2018 Google Inc. All Rights Reserved.
@@ -45,6 +45,8 @@ namespace ASL
     public class ARWorldOriginHelper : MonoBehaviour
     {
         private static ARWorldOriginHelper m_Instance;
+        private Material[] meshMats;
+        private Material[] lineMats;
 
         /// <summary>
         /// SIngleton for this class
@@ -82,7 +84,34 @@ namespace ASL
             m_RaycastManager = GameObject.Find("AR Session Origin").GetComponent<ARRaycastManager>();
             m_ARAnchorManager = GameObject.Find("AR Session Origin").GetComponent<ARAnchorManager>();
             m_ARPlaneManager = GameObject.Find("AR Session Origin").GetComponent<ARPlaneManager>();
+            meshMats = m_ARPlaneManager.planePrefab.GetComponent<MeshRenderer> ().materials;
+            lineMats = m_ARPlaneManager.planePrefab.GetComponent<LineRenderer> ().materials;
+
 #endif
+        }
+        
+        /// Change visibility of AR planes
+        public void SetInvisible(bool value){
+            if(value){
+                m_ARPlaneManager.planePrefab.GetComponent<MeshRenderer> ().materials = meshMats;
+                m_ARPlaneManager.planePrefab.GetComponent<LineRenderer> ().materials = lineMats;
+            }
+            else{
+                m_ARPlaneManager.planePrefab.GetComponent<MeshRenderer> ().materials = new Material[] { };
+                m_ARPlaneManager.planePrefab.GetComponent<LineRenderer> ().materials = new Material[] { };
+            }
+
+            foreach ( GameObject ObjectFound in GameObject.FindGameObjectsWithTag("ARPlane"))
+            {
+                if(!value){
+                    ObjectFound.GetComponent<MeshRenderer>().materials = new Material[] { };
+                    ObjectFound.GetComponent<LineRenderer>().materials = new Material[] { };
+                }
+                else{
+                ObjectFound.GetComponent<MeshRenderer>().materials = meshMats;
+                ObjectFound.GetComponent<LineRenderer>().materials = lineMats;
+                }
+            }
         }
 
         /// <summary>
@@ -288,5 +317,7 @@ namespace ASL
             }        
         }
 #endif
+
     }
+    
 }

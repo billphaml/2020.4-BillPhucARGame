@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - Slow
   - Map
+  - ARPlane
   layers:
   - Default
   - TransparentFX

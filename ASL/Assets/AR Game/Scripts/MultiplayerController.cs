@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 // Handles player spawning and controlling
 public class MultiplayerController : MonoBehaviour
@@ -68,15 +69,17 @@ public class MultiplayerController : MonoBehaviour
     {
         // Sets the internal reference to the player
         player = _myGameObject;
-
+    
         player.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
         {
             float[] myValue = new float[4];
-            myValue[0] = Random.Range(0.0f, 1.0f);
-            myValue[1] = Random.Range(0.0f, 1.0f);;
-            myValue[2] = Random.Range(0.0f, 1.0f);
-            myValue[3] = 1f;
+            myValue[0] = UnityEngine.Random.Range(0.0f, 1.0f);
+            myValue[1] = UnityEngine.Random.Range(0.0f, 1.0f);;
+            myValue[2] = UnityEngine.Random.Range(0.0f, 1.0f);
+            myValue[3] = 10f+ASL.GameLiftManager.GetInstance().m_PeerId;
             player.GetComponent<ASL.ASLObject>().SendFloatArray(myValue);
+        player.transform.GetChild(1).GetComponent<TMPro.TextMeshPro>().text=ASL.GameLiftManager.GetInstance().m_Username;
+
         });
 
     }
@@ -96,8 +99,13 @@ public class MultiplayerController : MonoBehaviour
 
         // Gets the player matching the id of the player that called the send floats function
         ASL.ASLHelper.m_ASLObjects.TryGetValue(_id, out temp);
-        if(_floats[3]==1f){
+        if(_floats[3]>=10f){
             temp.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(_floats[0], _floats[1], _floats[2], 1.0f);
+            int peerID = Convert.ToInt32(_floats[3]) - 10;
+            string username = ASL.GameLiftManager.GetInstance().m_Players[peerID];
+
+            temp.transform.GetChild(1).GetComponent<TMPro.TextMeshPro>().text = username;
+
         } else    {
         Vector3 dir = new Vector3(_floats[0], _floats[1], _floats[2]);
 

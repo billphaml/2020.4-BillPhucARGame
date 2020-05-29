@@ -11,6 +11,7 @@ TagManager:
   - Map
   - ARPlane
   - ARParticle
+  - Rock
   layers:
   - Default
   - TransparentFX

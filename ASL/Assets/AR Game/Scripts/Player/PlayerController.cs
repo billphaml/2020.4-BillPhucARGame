@@ -37,10 +37,15 @@ public class PlayerController : MonoBehaviour
         {
             isSlowed = false;
         }
+        
+        if (other.gameObject.tag == "Rock")
+        {
+            
+        }
     }
     
     void Start(){
-        TmpPrefab.text = ASL.GameLiftManager.GetInstance().m_Username;
+//        TmpPrefab.text = ASL.GameLiftManager.GetInstance().m_Username;
 
     }
 }

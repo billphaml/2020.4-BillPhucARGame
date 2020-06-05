@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 // Use only for Level prefab
-// Moves the level to whereever the user taps
-
-//todo: make a button to control when the level is able to be moved
+// Moves the level to where ever the user taps
 public class MoveOnTap : MonoBehaviour
 {
     void Update()

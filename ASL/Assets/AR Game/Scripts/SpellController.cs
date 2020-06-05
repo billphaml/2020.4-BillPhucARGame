@@ -19,11 +19,11 @@ public class SpellController : MonoBehaviour
 {
     // Reference to the UI buttons for spells
     [SerializeField]
-    private Button spOne, spTwo;
+    private Button spOne = default, spTwo = default;
 
     // Reference to UI text for displaying spell cooldowns
     [SerializeField]
-    private Text spOneCooldownDisplay, spTwoCooldownDisplay;
+    private Text spOneCooldownDisplay = default, spTwoCooldownDisplay = default;
 
     // Values for spell cooldowns
     [SerializeField]
@@ -34,7 +34,7 @@ public class SpellController : MonoBehaviour
 
     // Layers for the raycast to ignore
     [SerializeField]
-    private LayerMask ignore;
+    private LayerMask ignore = default;
 
     void Start()
     {

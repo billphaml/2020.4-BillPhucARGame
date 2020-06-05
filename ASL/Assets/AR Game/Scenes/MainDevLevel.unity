@@ -1992,6 +1992,7 @@ MonoBehaviour:
   m_NormalCloudAnchorObject: {fileID: 3412927446359963194, guid: 1d9ed9ffc8731334dacd3f202c1079d5, type: 3}
   m_CoinsCollected: {fileID: 1370711420}
   m_Toggle: {fileID: 465289118}
+  m_CamToggle: {fileID: 0}
 --- !u!114 &1076586955
 MonoBehaviour:
   m_ObjectHideFlags: 0

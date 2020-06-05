@@ -107,7 +107,7 @@ namespace SimpleDemos
                 m_LastValidPose = touchPose;
                 //It doesn't matter what we set the position to be to when creating this object because it will be reset to zero before it gets parented to its cloud anchor. 
                 //Setting it to 100 initially just helps prevent confusion as we shouldn't see the world origin cloud anchor object until the world origin cloud anchor is set
-                ASL.ASLHelper.InstanitateASLObject("Level", new Vector3(100, 100, 100), Quaternion.identity, string.Empty, string.Empty, SpawnWorldOrigin);
+                ASL.ASLHelper.InstanitateASLObject("Level", new Vector3(0, 0, 0), Quaternion.identity, string.Empty, string.Empty, SpawnWorldOrigin);
 
             }
         }

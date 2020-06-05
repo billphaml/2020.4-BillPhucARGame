@@ -18,12 +18,14 @@ public class CameraManipulation : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         Debug.Assert(LookAt != null);
     }
 
     // Update is called once per frame
     void Update()
     {
+        freeCam = GameVariables.isFreeCam;
         // Sets camera to game level
         if (LookAt == null)
         {

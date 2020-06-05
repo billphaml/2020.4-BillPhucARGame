@@ -29,6 +29,8 @@ public class MultiplayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player==null) return;
+        
         player.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
         {
             // Movement type 3 [Current]

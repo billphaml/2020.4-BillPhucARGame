@@ -35,14 +35,11 @@ namespace SimpleDemos
         /// <summary>Text that displays scene information to the user</summary>
         public Text m_CoinsCollected;
         
-//        /// <summary>debug text</summary>
-//        public Text m_debug;
-
-        /// <summary>Text that displays scene information to the user</summary>
-        /// public Text m_Timer;
-        
         /// toggle for enable/disable raycasting
         public Toggle m_Toggle;
+        
+        /// toggle for enable/disable freecam
+        public Toggle m_CamToggle;
 
         /// <summary>Called before start - sets up the singleton object for this class</summary>
         private void Awake()
@@ -66,7 +63,25 @@ namespace SimpleDemos
             toggle.onValueChanged.AddListener(delegate {
                 ToggleValueChanged(toggle);
             });
+            
+            Toggle camToggle = m_CamToggle.GetComponent<Toggle>();
+            //Add listener for when the state of the Toggle changes, to take action
+            camToggle.onValueChanged.AddListener(delegate {
+                CamToggleValueChanged(toggle);
+            });
 
+            
+            if (Application.platform != RuntimePlatform.Android)
+            {
+                m_Toggle.gameObject.SetActive(false);
+                m_CamToggle.gameObject.SetActive(true);
+            }
+            else
+            {
+                m_Toggle.gameObject.SetActive(true);
+                m_CamToggle.gameObject.SetActive(false);
+
+            }
         }
 
         /// <summary> The logic of this example - listens for screen touches and spawns whichever object is currently active on the drop down menu</summary>
@@ -154,6 +169,12 @@ namespace SimpleDemos
         {
             GameVariables.isRayCasting = t.isOn;
             ASL.ARWorldOriginHelper.GetInstance().SetInvisible(t.isOn);
+        }
+        
+        //Output the new state of the Toggle into Text
+        void CamToggleValueChanged(Toggle t)
+        {
+            GameVariables.isFreeCam = t.isOn;
         }
 
     }

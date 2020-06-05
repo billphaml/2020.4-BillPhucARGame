@@ -1,4 +1,4 @@
-﻿/*
+/*
  ******************************************************************************
  * SpellController.cs
  * This class handles the spell system for the game. The spell system allows

@@ -9,8 +9,14 @@ public class PlayerController : MonoBehaviour
 {
     public int collectedCoins = 0;
     public TextMeshPro TmpPrefab;
-
     public bool isSlowed = false;
+    private GameObject MainCamera;
+    private float Speed = 10.0f;
+
+    void Awake ()
+    {
+        MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
 
     // Delete coins when colliding
     private void OnTriggerEnter(Collider other)
@@ -44,8 +50,12 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void Start(){
-//        TmpPrefab.text = ASL.GameLiftManager.GetInstance().m_Username;
+    void Update(){
+        if (TmpPrefab.transform.rotation.eulerAngles.y != MainCamera.transform.rotation.eulerAngles.y)
+        {
+            TmpPrefab.transform.rotation = Quaternion.Lerp(TmpPrefab.transform.rotation, MainCamera.transform.rotation, Speed * Time.deltaTime);
 
+        }
     }
+    
 }

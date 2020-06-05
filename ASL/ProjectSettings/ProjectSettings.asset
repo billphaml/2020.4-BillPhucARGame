@@ -738,7 +738,6 @@ PlayerSettings:
       InternetClientServer: False
       OfflineMapsManagement: False
       Objects3D: False
-      Proximity: False
       RemoteSystem: False
       BlockedChatMessages: False
       PhoneCall: False

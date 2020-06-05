@@ -81,8 +81,10 @@ public class SpellController : MonoBehaviour
                 return;
             }
 
+            Vector3 modifiedPos = new Vector3(pos.x * 23, pos.y, pos.z * 23);
+
             // Spawn the spell into the level
-            ASL.ASLHelper.InstanitateASLObject("Slow Spell", pos, Quaternion.identity);
+            ASL.ASLHelper.InstanitateASLObject("Slow Spell", modifiedPos, Quaternion.identity, GameObject.Find("Level(Clone)").GetComponent<ASL.ASLObject>().m_Id);
 
             spOneTimestamp = Time.time + spOneCooldown;
         }

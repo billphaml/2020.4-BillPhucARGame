@@ -1,10 +1,11 @@
 /*
  ******************************************************************************
  * SpellController.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
  * This class handles the spell system for the game. The spell system allows
  * for a player for fire one of two spells using UI buttons and aiming using
  * their camera direction.
- * Authors: Bill Pham & Phuc Tran
  * 
  * Note:
  * Spell One - Left side button

@@ -13,7 +13,7 @@ public class RockObj : MonoBehaviour
     private bool isSelected = false;
 
     void Start(){
-        HandleClick.removeClickDelegate += RemoveRock;
+        //HandleClick.removeClickDelegate += RemoveRock;
 
     }
     // On touch

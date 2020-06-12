@@ -1,6 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/*
+ ******************************************************************************
+ * GameVariables.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
+ * Various global variables for tracking
+ ******************************************************************************
+*/
 
 public static class GameVariables
 {
@@ -13,5 +18,4 @@ public static class GameVariables
     public static int spellSelected = 0;
     public static bool selectRock = false;
     public static bool isFreeCam = false;
-
 }

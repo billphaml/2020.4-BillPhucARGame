@@ -1,29 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ ******************************************************************************
+ * Timer.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
+ * Counts down the time players have to collect coins, stops the game when time
+ * is out.
+ ******************************************************************************
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    // Reference to time label
     public Text lbl;
-    private int seconds;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        seconds = 0;
-    }
+    public float timeRemainingInSeconds = 120;
 
     // Update is called once per frame
     void Update()
     {
-        if(!GameVariables.gameStarted)
+        if (!GameVariables.gameStarted)
         {
-            seconds=0;
-            lbl.text="Time: "+seconds/60+"s";
+            timeRemainingInSeconds = 120;
+
+            lbl.text = "Time: " + Mathf.Round(timeRemainingInSeconds) + "s";
+
             return;
         }
-        seconds++;
-        lbl.text="Time: "+seconds/60+"s";
+
+        // End the game once time is zero
+        if (timeRemainingInSeconds <= 0)
+        {
+            GameVariables.gameStarted = false;
+        }
+
+        timeRemainingInSeconds -= Time.deltaTime;
+        lbl.text = "Time: " + Mathf.Round(timeRemainingInSeconds) + "s";
     }
 }

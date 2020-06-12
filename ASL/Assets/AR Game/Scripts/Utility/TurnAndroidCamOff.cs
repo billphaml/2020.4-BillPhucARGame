@@ -1,20 +1,20 @@
 ﻿/*
  ******************************************************************************
- * TurnPCCamOff.cs
+ * TurnAndroidCamOff.cs
  * Authors: Bill Pham & Phuc Tran
  * 
- * Turns the PC camera off when on Android client so only one main camera
- * exists
+ * Turns the Android camera off when on non-Android client so only one main
+ * camera exists
  ******************************************************************************
 */
 
 using UnityEngine;
 
-public class TurnPCCamOff : MonoBehaviour
+public class TurnAndroidCamOff : MonoBehaviour
 {
     void Awake()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform != RuntimePlatform.Android)
         {
             gameObject.SetActive(false);
         }

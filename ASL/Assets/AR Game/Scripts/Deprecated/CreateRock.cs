@@ -13,10 +13,10 @@ public class CreateRock : MonoBehaviour
     void Start()
     {
         // Delegate for handling click button
-        HandleClick.popClickDelegate += PopPout;
-        HandleClick.rockClickDelegate += AddRock;
+        //HandleClick.popClickDelegate += PopPout;
+        //HandleClick.rockClickDelegate += AddRock;
         HandleClick.resetClickDelegate += RemoveAllRock;
-        HandleClick.removeClickDelegate += RemoveRock;
+        //HandleClick.removeClickDelegate += RemoveRock;
 
     }
     

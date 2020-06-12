@@ -1,16 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ ******************************************************************************
+ * PlayerController.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
+ * This class handles the status of the player such as collisions with coin
+ * objects or spells. This class doesn't handle player movement.
+ ******************************************************************************
+*/
+
 using UnityEngine;
 using TMPro;
 
-// Deletes coin when collding with them
-// Move this function to the coin object later so player object doesn't need two colliders
 public class PlayerController : MonoBehaviour
 {
+    // Variable for the total coins the player has collected
     public int collectedCoins = 0;
+
+    // Variable for the player nametag
     public TextMeshPro TmpPrefab;
+
+    // Player crowd control status
     public bool isSlowed = false;
+
+    // Reference to main camera
     private GameObject MainCamera;
+
+    // Player default speed
     private float Speed = 10.0f;
 
     void Awake ()
@@ -18,7 +33,7 @@ public class PlayerController : MonoBehaviour
         MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
-    // Delete coins when colliding
+    // Delete coins when colliding and adds a point to score
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Coin")
@@ -37,6 +52,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Detects if colliding with a crowd control effect
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Slow")
@@ -50,12 +66,19 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void Update(){
+    void Update() {
+        if (!GameVariables.gameStarted)
+        {
+            collectedCoins = 0;
+            GameVariables.collectCoins = collectedCoins;
+        }
+
+        // Rotates player nametag towards the camera
         if (TmpPrefab.transform.rotation.eulerAngles.y != MainCamera.transform.rotation.eulerAngles.y)
         {
             TmpPrefab.transform.rotation = Quaternion.Lerp(TmpPrefab.transform.rotation, MainCamera.transform.rotation, Speed * Time.deltaTime);
 
         }
-    }
-    
+    }  
 }
+

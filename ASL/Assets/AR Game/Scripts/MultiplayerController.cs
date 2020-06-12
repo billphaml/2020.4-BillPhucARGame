@@ -1,3 +1,12 @@
+/*
+ ******************************************************************************
+ * MultiplayerController.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
+ * Controller for player movement.
+ ******************************************************************************
+*/
+
 using UnityEngine;
 using System;
 
@@ -101,27 +110,27 @@ public class MultiplayerController : MonoBehaviour
 
         // Gets the player matching the id of the player that called the send floats function
         ASL.ASLHelper.m_ASLObjects.TryGetValue(_id, out temp);
-        if(_floats[3]>=10f){
+        if (_floats[3] >= 10f)
+        {
             temp.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(_floats[0], _floats[1], _floats[2], 1.0f);
             int peerID = Convert.ToInt32(_floats[3]) - 10;
             string username = ASL.GameLiftManager.GetInstance().m_Players[peerID];
 
             temp.transform.GetChild(1).GetComponent<TMPro.TextMeshPro>().text = username;
 
-        } else    {
-        Vector3 dir = new Vector3(_floats[0], _floats[1], _floats[2]);
+        } else {
+            Vector3 dir = new Vector3(_floats[0], _floats[1], _floats[2]);
 
-        // If there is input else stop the player
-        if (dir != Vector3.zero)
-        {
-            // Applies rigidbody physics to the player using floats containing direction
-            temp.gameObject.GetComponent<Rigidbody>().AddForce(dir);
+            // If there is input else stop the player
+            if (dir != Vector3.zero)
+            {
+                // Applies rigidbody physics to the player using floats containing direction
+                temp.gameObject.GetComponent<Rigidbody>().AddForce(dir);
+            }
+            else
+            {
+                temp.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
         }
-        else
-        {
-            temp.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
-        }
-
     }
 }

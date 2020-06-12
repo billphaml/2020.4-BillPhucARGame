@@ -1,3 +1,11 @@
+/*
+ ******************************************************************************
+ * CameraManipulation.cs
+ * Authors: Kelvin Sung
+ * Modified by Bill Pham & Phuc Tran
+ ******************************************************************************
+*/
+
 using UnityEngine;
 using System.Collections;
 

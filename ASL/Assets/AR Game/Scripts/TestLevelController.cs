@@ -1,5 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ ******************************************************************************
+ * TestLevelController.cs
+ * Authors: Greg Smith
+ * Modified by Bill Pham & Phuc Tran
+ * 
+ * Modified game controller to spawn in the playable level and anchor it
+ ******************************************************************************
+*/
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -66,10 +74,10 @@ namespace SimpleDemos
             
             Toggle camToggle = m_CamToggle.GetComponent<Toggle>();
             //Add listener for when the state of the Toggle changes, to take action
-            camToggle.onValueChanged.AddListener(delegate {
-                CamToggleValueChanged(toggle);
+            m_CamToggle.onValueChanged.AddListener((isFreeCam) =>
+            {
+                CamToggleValueChanged(isFreeCam);
             });
-
             
             if (Application.platform != RuntimePlatform.Android)
             {
@@ -171,11 +179,17 @@ namespace SimpleDemos
             ASL.ARWorldOriginHelper.GetInstance().SetInvisible(t.isOn);
         }
         
-        //Output the new state of the Toggle into Text
-        void CamToggleValueChanged(Toggle t)
+        // Output the new state of the Toggle into Text
+        public void CamToggleValueChanged(bool isFreeCam)
         {
-            GameVariables.isFreeCam = t.isOn;
+            if (isFreeCam)
+            {
+                GameVariables.isFreeCam = true;
+            }
+            else
+            {
+                GameVariables.isFreeCam = false;
+            }
         }
-
     }
 }

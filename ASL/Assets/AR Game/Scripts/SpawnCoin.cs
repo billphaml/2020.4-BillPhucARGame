@@ -1,3 +1,13 @@
+/*
+ ******************************************************************************
+ * SpawnCoin.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
+ * Spawns coins periodically onto the level, keeps a cap as to the number of
+ * coins and despawns them if the cap is reached
+ ******************************************************************************
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

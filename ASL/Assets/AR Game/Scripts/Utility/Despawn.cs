@@ -1,15 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ ******************************************************************************
+ * Despawn.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
+ * Destroys a object after it has existed for a set amount of time.
+ ******************************************************************************
+*/
+
 using UnityEngine;
 
 public class Despawn : MonoBehaviour
 {
-    private float timeSinceSpawn = 0.0f; 
+    public float despawnTime = 30.0f;
 
-    // Update is called once per frame
+    private float timeSinceSpawn = 0.0f;
+
     void Update()
     {
-        if (timeSinceSpawn > 30)
+        if (timeSinceSpawn > despawnTime)
         {
             Destroy(gameObject);
         }

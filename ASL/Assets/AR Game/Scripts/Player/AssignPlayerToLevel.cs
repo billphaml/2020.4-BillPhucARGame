@@ -1,14 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ ******************************************************************************
+ * AssignPlayerToLevel.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
+ * Parents the player object to the level object when the level is spawned in
+ * so that they move as one entity with ASL updates.
+ ******************************************************************************
+*/
+
 using UnityEngine;
 
-// Parents the player object to the level object when the level is spawned in
-// so that they move as one entity
 public class AssignPlayerToLevel : MonoBehaviour
 {
+    // Reference to parent which should be the level
     private GameObject parent;
 
-    // Update is called once per frame
     void Update()
     {
         // Searches the object hierarchy for the level

@@ -1,5 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ ******************************************************************************
+ * MoveOnTap.cs
+ * Authors: Bill Pham & Phuc Tran
+ * 
+ * Allows Android players to reposition the level in real world space by
+ * tapping. The isRayCasting var must be true to move the level
+ ******************************************************************************
+*/
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,8 +17,11 @@ public class MoveOnTap : MonoBehaviour
 {
     void Update()
     {
-        if(!GameVariables.isRayCasting)
-        return;
+        if (!GameVariables.isRayCasting)
+        {
+            return;
+        }
+
         if (Application.platform == RuntimePlatform.Android)
         {
             // Gets the touch position

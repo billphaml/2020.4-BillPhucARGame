@@ -87,10 +87,9 @@ public class MultiplayerController : MonoBehaviour
             myValue[0] = UnityEngine.Random.Range(0.0f, 1.0f);
             myValue[1] = UnityEngine.Random.Range(0.0f, 1.0f);;
             myValue[2] = UnityEngine.Random.Range(0.0f, 1.0f);
-            myValue[3] = 10f+ASL.GameLiftManager.GetInstance().m_PeerId;
+            myValue[3] = 10f + ASL.GameLiftManager.GetInstance().m_PeerId;
             player.GetComponent<ASL.ASLObject>().SendFloatArray(myValue);
-        player.transform.GetChild(1).GetComponent<TMPro.TextMeshPro>().text=ASL.GameLiftManager.GetInstance().m_Username;
-
+            player.transform.GetChild(1).GetComponent<TMPro.TextMeshPro>().text = ASL.GameLiftManager.GetInstance().m_Username;
         });
 
     }

@@ -63,7 +63,7 @@ namespace SimpleDemos
             //    "Only 1 player can spawn this cloud anchor and it should always be the first cloud anchor created if you plan on utilizing cloud anchors.";
 
             /// Set score text
-            m_CoinsCollected.text="Score : " + GameVariables.collectCoins;
+            m_CoinsCollected.text = "Score : " + GameVariables.collectCoins;
             
             /// Add event listener
             Toggle toggle = m_Toggle.GetComponent<Toggle>();

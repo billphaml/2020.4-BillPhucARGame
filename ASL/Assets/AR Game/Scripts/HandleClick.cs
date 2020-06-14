@@ -116,9 +116,6 @@ public class HandleClick : MonoBehaviour
             GameVariables.gameStarted = true;
         }
 
-        // Reset player coins
-        GameVariables.collectCoins = 0;
-
         if (!GameVariables.gameStarted)
         {
             resetClickDelegate();

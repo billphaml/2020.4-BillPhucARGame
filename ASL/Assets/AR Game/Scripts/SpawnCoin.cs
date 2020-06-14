@@ -53,15 +53,14 @@ public class SpawnCoin : MonoBehaviour
         }
         
         // Game Stop
-        if(GameVariables.gameStarted==false){
-            while(coins.Count>0){
+        if (GameVariables.gameStarted == false) {
+            while (coins.Count > 0) {
                 GameObject coin = (GameObject)coins.Peek();
                 coins.Dequeue();
                 coin.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
                 {
                     coin.GetComponent<ASL.ASLObject>().DeleteObject();
                 });
-                
             }
         }
         

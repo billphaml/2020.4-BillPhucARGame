@@ -39,9 +39,6 @@ namespace SimpleDemos
 
         /// <summary> Gets the hit position where the user touched the screen to help record where the object is verses where the user tapped</summary>
         private Pose? m_LastValidPose;
-
-        /// <summary>Text that displays scene information to the user</summary>
-        public Text m_CoinsCollected;
         
         /// toggle for enable/disable raycasting
         public Toggle m_Toggle;
@@ -61,9 +58,6 @@ namespace SimpleDemos
             m_DisplayInformation.text = "Touch to spawn level.";
             //m_DisplayInformation.text = "The first location you touch will spawn the World Origin Cloud Anchor. " +
             //    "Only 1 player can spawn this cloud anchor and it should always be the first cloud anchor created if you plan on utilizing cloud anchors.";
-
-            /// Set score text
-            m_CoinsCollected.text = "Score : " + GameVariables.collectCoins;
             
             /// Add event listener
             Toggle toggle = m_Toggle.GetComponent<Toggle>();
@@ -95,9 +89,6 @@ namespace SimpleDemos
         /// <summary> The logic of this example - listens for screen touches and spawns whichever object is currently active on the drop down menu</summary>
         void Update()
         {
-
-            m_CoinsCollected.text="Score : " + GameVariables.collectCoins;
-
             Pose? touchPose = GetTouch();
             if (touchPose == null) //If we didn't hit anything - return
             {

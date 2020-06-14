@@ -2215,7 +2215,6 @@ MonoBehaviour:
   m_DisplayInformation: {fileID: 1309228797}
   m_WorldOriginCloudAnchorObject: {fileID: 7745138100406756209, guid: 680303b699576f643a859b92ac615a70, type: 3}
   m_NormalCloudAnchorObject: {fileID: 3412927446359963194, guid: 1d9ed9ffc8731334dacd3f202c1079d5, type: 3}
-  m_CoinsCollected: {fileID: 1370711420}
   m_Toggle: {fileID: 465289118}
   m_CamToggle: {fileID: 1963235229}
 --- !u!114 &1076586955
@@ -2407,6 +2406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lbl: {fileID: 1292067051}
   timeRemainingInSeconds: 120
+  controller: {fileID: 2143687802}
 --- !u!114 &1292067051
 MonoBehaviour:
   m_ObjectHideFlags: 0

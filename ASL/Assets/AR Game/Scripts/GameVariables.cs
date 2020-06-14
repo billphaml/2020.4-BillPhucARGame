@@ -9,8 +9,6 @@
 
 public static class GameVariables
 {
-    public static int collectCoins = 0;
-    public static int totalCoins = 0;
     public static string debugStr = "DEBUGGING";
     public static bool gameStarted = false;
     public static bool isRayCasting = false;

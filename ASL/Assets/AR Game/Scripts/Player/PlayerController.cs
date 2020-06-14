@@ -10,6 +10,7 @@
 
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,9 +29,20 @@ public class PlayerController : MonoBehaviour
     // Player default speed
     private float Speed = 10.0f;
 
+    // Reference to the player's local score
+    public Text m_CoinsCollected;
+
     void Awake ()
     {
         MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
+
+    private void Start()
+    {
+        m_CoinsCollected = GameObject.Find("Score Text").GetComponent<Text>();
+
+        /// Set score text
+        m_CoinsCollected.text = "Score : " + collectedCoins;
     }
 
     // Delete coins when colliding and adds a point to score
@@ -41,9 +53,10 @@ public class PlayerController : MonoBehaviour
             other.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
             {
                 other.GetComponent<ASL.ASLObject>().DeleteObject();
-                collectedCoins += 1;
-                GameVariables.collectCoins = collectedCoins;
             });
+
+            collectedCoins += 1;
+            m_CoinsCollected.text = "Score : " + collectedCoins;
         }
 
         if (other.gameObject.tag == "Slow")
@@ -70,14 +83,13 @@ public class PlayerController : MonoBehaviour
         if (!GameVariables.gameStarted)
         {
             collectedCoins = 0;
-            GameVariables.collectCoins = collectedCoins;
+            m_CoinsCollected.text = "Score : " + collectedCoins;
         }
 
         // Rotates player nametag towards the camera
         if (TmpPrefab.transform.rotation.eulerAngles.y != MainCamera.transform.rotation.eulerAngles.y)
         {
             TmpPrefab.transform.rotation = Quaternion.Lerp(TmpPrefab.transform.rotation, MainCamera.transform.rotation, Speed * Time.deltaTime);
-
         }
     }  
 }

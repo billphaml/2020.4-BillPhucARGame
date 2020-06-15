@@ -42,6 +42,14 @@ public class MultiplayerController : MonoBehaviour
         
         player.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
         {
+            float[] myValue = new float[4];
+            myValue[0] = UnityEngine.Random.Range(0.0f, 1.0f);
+            myValue[1] = UnityEngine.Random.Range(0.0f, 1.0f);;
+            myValue[2] = UnityEngine.Random.Range(0.0f, 1.0f);
+            myValue[3] = 10f + ASL.GameLiftManager.GetInstance().m_PeerId;
+            player.GetComponent<ASL.ASLObject>().SendFloatArray(myValue);
+            player.transform.GetChild(1).GetComponent<TMPro.TextMeshPro>().text = ASL.GameLiftManager.GetInstance().m_Username;
+
             // Movement type 3 [Current]
             // Moves the player by sending float array for xyz direction to all clients and each
             // client uses rigidbody physics on the player gameobject that was affected, affects
@@ -111,7 +119,9 @@ public class MultiplayerController : MonoBehaviour
         ASL.ASLHelper.m_ASLObjects.TryGetValue(_id, out temp);
         if (_floats[3] >= 10f)
         {
-            temp.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(_floats[0], _floats[1], _floats[2], 1.0f);
+            Color currentColor = temp.transform.GetChild(0).GetComponent<Renderer>().material.color;
+            if(currentColor[0]==1.0f&&currentColor[1]==0.0f&&currentColor[2]==0.0){
+                temp.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(_floats[0], _floats[1], _floats[2], 1.0f);}
             int peerID = Convert.ToInt32(_floats[3]) - 10;
             string username = ASL.GameLiftManager.GetInstance().m_Players[peerID];
 

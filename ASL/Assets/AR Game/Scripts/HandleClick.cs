@@ -37,7 +37,7 @@ public class HandleClick : MonoBehaviour
 
         controller = gameObject;
 
-        gameObject.GetComponent<ASL.ASLObject>()._LocallySetFloatCallback(ChangeGameState);
+        controller.GetComponent<ASL.ASLObject>()._LocallySetFloatCallback(ChangeGameState);
 
         // Add listener
         //Button btnAdd = addObjButton.GetComponent<Button>();

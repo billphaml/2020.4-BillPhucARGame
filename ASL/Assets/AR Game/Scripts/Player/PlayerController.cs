@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        TmpPrefab.text = ASL.GameLiftManager.GetInstance().m_Username;
+
         m_CoinsCollected = GameObject.Find("Score Text").GetComponent<Text>();
 
         /// Set score text
